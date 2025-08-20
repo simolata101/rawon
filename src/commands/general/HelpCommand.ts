@@ -54,6 +54,7 @@ export class HelpCommand extends BaseCommand {
 
             this.listEmbed.data.fields = [];
             for (const category of this.client.commands.categories.values()) {
+                if (category.name.toLowerCase() === "moderation") continue; // skip moderation
                 const isDev = this.client.config.devs.includes(ctx.author.id);
                 const cmds = category.cmds.filter(c => (isDev ? true : c.meta.devOnly !== true)).map(c => `\`${c.meta.name}\``);
                 if (cmds.length === 0) continue;
